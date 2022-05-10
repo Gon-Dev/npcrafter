@@ -1,10 +1,10 @@
-# Magic: the Gathering - Gallery
+# Prep Food
 
 In this study case i'll be constructing a gallery for Dungeons & Dragons Dungeon Mastering. "What's that Goni?", you could be thinking. Well, as storytelling narrator the Dungeon Master often encounter him/herself with a lack of inspiration. In most cases a book helps, but in other it cannot. We need some visual help, and searching for fantasy illustrations (and filtering what we need) is a pain under the back. 
 
 So i will take the Scryfall database and, searching and displaying the art crops of the Magic The Gathering cards, be ofering quick, random and quality visual reference for illuminate your next fantasy TTRPG adventure.
 
-# What i should learn
+# What I should learn
 
 - How to propperly fetch and manipulate data from a database.
 - How Promises and asynchronous tasks are resolved in Vanilla Javascript.

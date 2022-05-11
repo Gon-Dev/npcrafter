@@ -2,7 +2,7 @@ const searchButtons = document.querySelectorAll(".search");
 const cardsWrapper = document.querySelector(".cards-wrapper");
 
 async function wait(ms) {
-    await setTimeout(ms);
+    setTimeout(ms);
     return;
 }
 function shuffle(array) {
@@ -14,7 +14,7 @@ function handleError(err) {
     console.log(err);
     console.log("-----------------SEPARADOR-----------------");
 }
-async function mtgDataFetch(endpoint) {
+async function dataFetch(endpoint) {
     wait(100);
     const response = await fetch(endpoint).catch(handleError);
     const data = await response.json();
@@ -38,7 +38,7 @@ function makeCard(cardObject) {
 async function loadMore(endpoint,showMoreButton) {
     showMoreButton.style.display !== "none" ? showMoreButton.style.display = "none" : null;
     if (endpoint !== "undefined") {
-    const listObject = await mtgDataFetch(endpoint);
+    const listObject = await dataFetch(endpoint);
     const cardsArray = listObject.data;
     cardsArray.forEach( (card) => { card.image_uris !== undefined && card.legalities.pauper === "legal" ? makeCard(card) : null });
     const nextPageEndpoint = listObject.next_page;
@@ -47,24 +47,29 @@ async function loadMore(endpoint,showMoreButton) {
 }
 
 function showMore(endpoint) {
-    const showMoreButton = document.createElement("button");
-    showMoreButton.textContent = "Load More";
-    showMoreButton.className = "loadMoreButton";
-    cardsWrapper.insertAdjacentElement("afterend", showMoreButton);
-    showMoreButton.addEventListener('click', () => loadMore(endpoint,showMoreButton));
+    if (endpoint === "undefined") {
+        showMoreButton.style.display = "none";
+        return;
+    } else {
+        const showMoreButton = document.createElement("button");
+        showMoreButton.textContent = "Load More";
+        showMoreButton.className = "loadMoreButton";
+        cardsWrapper.insertAdjacentElement("afterend", showMoreButton);
+        showMoreButton.addEventListener('click', () => loadMore(endpoint,showMoreButton));
+    }
+    
 }
 
 async function searchButtonHandler(e) {
     cardsWrapper.innerHTML = "";
     const query = e.target.value;
     const endpoint = `https://api.scryfall.com/cards/search?q=cube:modern&q=f:pauper&q=t:${query}&order=released`;
-    const listObject = await mtgDataFetch(endpoint);
+    const listObject = await dataFetch(endpoint);
     const cardsArray = listObject.data;
     shuffle(cardsArray);
     cardsArray.forEach( (card) => { card.image_uris !== undefined && card.legalities.pauper === "legal" ? makeCard(card) : null });
     const nextPageEndpoint = listObject.next_page;
     showMore(nextPageEndpoint);
-    showMoreButton.style.display !== "none" ? showMoreButton.style.display = "none" : null;
 };
 
 

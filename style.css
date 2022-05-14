@@ -85,3 +85,12 @@ body {
 .twitter { transform: scale(90%); }
 .linkedin { margin-bottom: 10px; }
 .email { transform: scaleX(90%); }
+.load-more { display: none;}
+.scroll-to-top {
+    display: none;
+    width: 100px;
+    height: 100px;
+    bottom: 100px;
+    right: 100px;
+    bottom: 100px;
+}

@@ -1,5 +1,7 @@
 const searchButtons = document.querySelectorAll(".search");
 const cardsWrapper = document.querySelector(".cards-wrapper");
+const buttonScrollUp = document.querySelector(".scroll-to-top");
+
 
 async function wait(ms) {
     setTimeout(ms);
@@ -55,6 +57,7 @@ function showMore(endpoint) {
         showMoreButton.textContent = "Load More";
         showMoreButton.className = "loadMoreButton";
         cardsWrapper.insertAdjacentElement("afterend", showMoreButton);
+        console.log(showMoreButton);
         showMoreButton.addEventListener('click', () => loadMore(endpoint,showMoreButton));
     }
     
@@ -74,5 +77,5 @@ async function searchButtonHandler(e) {
 
 
 searchButtons.forEach( (button) => button.addEventListener('click',searchButtonHandler) );
-
-
+window.addEventListener('scroll', window.scrollY > 1500 ?  buttonScrollUp.style.display = "fixed" : buttonScrollUp.style.display = "none" );
+window.addEventListener('scroll', () => console.log(window.scrollY) );

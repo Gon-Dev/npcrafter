@@ -47,6 +47,7 @@ async function displayMore(nextEndpoint) {
 }
 
 const typeSearchHandler = async function(button) {
+    cardsWrapper.innerHTML = "";
     const typeToFetch = button.value;
     const typeEndpoint = `https://api.scryfall.com/cards/search?q=cube:modern&q=f:pauper&q=t:${typeToFetch}&order=released`; // VER ORDEN DE REQUEST PARA FETCHEO
     const cardsList = await dataFetch(typeEndpoint);

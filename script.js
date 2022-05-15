@@ -1,81 +1,86 @@
-const searchButtons = document.querySelectorAll(".search");
+const typeSearchButtons = document.querySelectorAll(".search");
 const cardsWrapper = document.querySelector(".cards-wrapper");
+const loadMoreButton = document.querySelector(".load-more");
 const buttonScrollUp = document.querySelector(".scroll-to-top");
+const loading = document.querySelector(".loading");
 
-
-async function wait(ms) {
-    setTimeout(ms);
-    return;
-}
-function shuffle(array) {
-    array.sort(() => Math.random() - 0.5);
-    return array;
-}
 function handleError(err) {
     console.log("ERRRRRRRRROOOR");
     console.log(err);
     console.log("-----------------SEPARADOR-----------------");
 }
+function shuffle(array) {
+    array.sort((a, b) => 0.5 - Math.random());
+}
+function handleScrollUpButton() {
+    window.scrollY > 1500 ?  buttonScrollUp.style.display = "initial" : buttonScrollUp.style.display = "none";
+    buttonScrollUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })  ) ;
+}
 async function dataFetch(endpoint) {
-    wait(100);
+    loading.style.display = "initial";
+    setTimeout(100);
     const response = await fetch(endpoint).catch(handleError);
     const data = await response.json();
+    loading.style.display = "none";
     return data;
 }
-
-function makeCard(cardObject) {
+function displayCard(cardData) {
     const card = document.createElement("div");
     card.innerHTML = `
     <div class="card">
-        <img class="cardArt" src="${cardObject.image_uris.art_crop}" alt="">
-        <h1 class="cardName">"${cardObject.name}"</h1>
-        <h2 class="cardArtist">${cardObject.artist} - ${cardObject.frame} </h2>
+        <img class="cardArt" src="${cardData.image_uris.art_crop}" alt="">
+        <h1 class="cardName">"${cardData.name}"</h1>
+        <h2 class="cardArtist">${cardData.artist} - ${cardData.frame} </h2>
         <div class="cardDivider"></div>
     </div>
     `;
     cardsWrapper.insertAdjacentElement("beforeend",card);
     return card;
 }
-
-async function loadMore(endpoint,showMoreButton) {
-    showMoreButton.style.display !== "none" ? showMoreButton.style.display = "none" : null;
-    if (endpoint !== "undefined") {
-    const listObject = await dataFetch(endpoint);
-    const cardsArray = listObject.data;
-    cardsArray.forEach( (card) => { card.image_uris !== undefined && card.legalities.pauper === "legal" ? makeCard(card) : null });
-    const nextPageEndpoint = listObject.next_page;
-    showMore(nextPageEndpoint);
-    } else return
-}
-
-function showMore(endpoint) {
-    if (endpoint === "undefined") {
-        showMoreButton.style.display = "none";
+async function displayMore(nextEndpoint) {
+    console.log(nextEndpoint);
+    if (nextEndpoint !== "undefined") {
+        const cardsList = await dataFetch(nextEndpoint);
+        const cardsArray = cardsList.data;
+        cardsArray.forEach( (card) =>  card.image_uris !== undefined ? displayCard(card) : null);
+        const nextPageEndpoint = cardsList.next_page;
+        loadMoreButton.value = nextPageEndpoint;
         return;
     } else {
-        const showMoreButton = document.createElement("button");
-        showMoreButton.textContent = "Load More";
-        showMoreButton.className = "loadMoreButton";
-        cardsWrapper.insertAdjacentElement("afterend", showMoreButton);
-        console.log(showMoreButton);
-        showMoreButton.addEventListener('click', () => loadMore(endpoint,showMoreButton));
+        loadMoreButton.style.display = "none";
+        return;
     }
-    
+}
+const typeSearchHandler = async function(button) {
+    cardsWrapper.innerHTML = "";
+    const typeToFetch = button.value;
+    const typeEndpoint = `https://api.scryfall.com/cards/search?q=cube:modern&q=f:pauper&q=t:${typeToFetch}&order=released`; // VER ORDEN DE REQUEST PARA FETCHEO
+    const cardsList = await dataFetch(typeEndpoint);
+    const cardsArray = cardsList.data;
+    shuffle(cardsArray);
+    cardsArray.forEach( (card) =>  card.image_uris !== undefined ? displayCard(card) : null);
+    const nextPageEndpoint = cardsList.next_page;
+    loadMoreButton.value = nextPageEndpoint;
+    loadMoreButton.addEventListener ( "click", () => displayMore(loadMoreButton.value) );
+    loadMoreButton.style.display = "initial";
 }
 
-async function searchButtonHandler(e) {
-    cardsWrapper.innerHTML = "";
-    const query = e.target.value;
-    const endpoint = `https://api.scryfall.com/cards/search?q=cube:modern&q=f:pauper&q=t:${query}&order=released`;
-    const listObject = await dataFetch(endpoint);
-    const cardsArray = listObject.data;
-    shuffle(cardsArray);
-    cardsArray.forEach( (card) => { card.image_uris !== undefined && card.legalities.pauper === "legal" ? makeCard(card) : null });
-    const nextPageEndpoint = listObject.next_page;
-    showMore(nextPageEndpoint);
-};
+window.addEventListener('scroll',handleScrollUpButton);
+
+typeSearchButtons.forEach( button => button.addEventListener('click', () => typeSearchHandler(button)));
 
 
-searchButtons.forEach( (button) => button.addEventListener('click',searchButtonHandler) );
-window.addEventListener('scroll', window.scrollY > 1500 ?  buttonScrollUp.style.display = "fixed" : buttonScrollUp.style.display = "none" );
-window.addEventListener('scroll', () => console.log(window.scrollY) );
+
+// TODO : COMMITEAR
+// TODO : HACER ANDAR EL PUTO BOTON DE SCROLL UP - NO ESTA CAMBIANDO LA PROPIEDAD DISPLAY 
+
+
+
+
+
+
+
+
+
+
+// window.addEventListener('scroll', () => { window.scrollY > 1500 ? buttonScrollUp.style.display = "initial"  : buttonScrollUp.style.display = "none" });

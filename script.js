@@ -17,7 +17,7 @@ function handleScrollUpButton() {
     buttonScrollUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })  ) ;
 }
 async function dataFetch(endpoint) {
-    loading.style.display = "initial";
+    loading.style.display = "inherit";
     setTimeout(100);
     const response = await fetch(endpoint).catch(handleError);
     const data = await response.json();

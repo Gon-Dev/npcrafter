@@ -3,6 +3,7 @@ const cardsWrapper = document.querySelector(".cards-wrapper");
 const loadMoreButton = document.querySelector(".load-more");
 const buttonScrollUp = document.querySelector(".scroll-to-top");
 const loading = document.querySelector(".loading");
+buttonScrollUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })  ) ;
 
 function handleError(err) {
     console.log("ERRRRRRRRROOOR");
@@ -12,9 +13,9 @@ function handleError(err) {
 function shuffle(array) {
     array.sort((a, b) => 0.5 - Math.random());
 }
-function handleScrollUpButton() {
-    window.scrollY > 1500 ?  buttonScrollUp.style.display = "initial" : buttonScrollUp.style.display = "none";
-    buttonScrollUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })  ) ;
+function handleScrollUpButton(par) {
+    let yPosition = window.scrollY;
+    yPosition > 1500 ? buttonScrollUp.style.opacity = 100 : buttonScrollUp.style.opacity = 0 
 }
 async function dataFetch(endpoint) {
     loading.style.display = "inherit";
@@ -38,7 +39,6 @@ function displayCard(cardData) {
     return card;
 }
 async function displayMore(nextEndpoint) {
-    console.log(nextEndpoint);
     if (nextEndpoint !== "undefined") {
         const cardsList = await dataFetch(nextEndpoint);
         const cardsArray = cardsList.data;
@@ -52,6 +52,8 @@ async function displayMore(nextEndpoint) {
     }
 }
 const typeSearchHandler = async function(button) {
+    loadMoreButton.style.display = "none";
+    loading.style.display = "none";
     cardsWrapper.innerHTML = "";
     const typeToFetch = button.value;
     const typeEndpoint = `https://api.scryfall.com/cards/search?q=cube:modern&q=f:pauper&q=t:${typeToFetch}&order=released`; // VER ORDEN DE REQUEST PARA FETCHEO
@@ -68,19 +70,3 @@ const typeSearchHandler = async function(button) {
 window.addEventListener('scroll',handleScrollUpButton);
 
 typeSearchButtons.forEach( button => button.addEventListener('click', () => typeSearchHandler(button)));
-
-
-
-// TODO : COMMITEAR
-// TODO : HACER ANDAR EL PUTO BOTON DE SCROLL UP - NO ESTA CAMBIANDO LA PROPIEDAD DISPLAY 
-
-
-
-
-
-
-
-
-
-
-// window.addEventListener('scroll', () => { window.scrollY > 1500 ? buttonScrollUp.style.display = "initial"  : buttonScrollUp.style.display = "none" });

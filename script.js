@@ -53,7 +53,7 @@ function displayCard(cardData) {
     <img class="cardArt" src="${cardData.image_uris.art_crop}" alt="">
     <h1 class="cardName">"${cardData.name}"</h1>
     <h2 class="cardArtist">${cardData.artist} - ${cardData.frame} </h2>
-    <button class="cardSource" value=${cardData.image_uris.normal}>source card</button>
+    <button class="cardSource" value=${cardData.image_uris.normal}>SOURCE CARD</button>
     <div class="cardDivider"></div>
     `;
     cardDiv.className = "card";

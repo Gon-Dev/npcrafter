@@ -116,19 +116,24 @@
     width: 100vw;
     }
     .cardSource {
+        width: 6.5rem;
+        height: 2rem;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 1.5rem auto auto auto;
         border: none;
+        font-size: 0.75rem;
         background: none;
-        font-style: italic;
-        background-color: hsla(199, 100%, 26%, 0.3);
+        background-color: hsla(223, 20%, 53%, 0.3); 
         color:var(--color-alto);
-        font-weight: bold;
+        color: hsla(60, 2%, 18%, 0.8);
+        box-shadow: 1px 1px 5px hsla(223, 20%, 53%, 0.15); 
+        border-radius: 5px;
+        font-family: 'Josefin Sans', sans-serif;
     }
+
     .cardSource:active {
-        background-color: hsla(37, 80%, 52%, 0.6);
-        color: var(--color-saturado);
+        background-color: hsla(37, 80%, 52%, 0.8);
+        color: hsla(60, 2%, 18%, 0.9);
     }
     .cardArtist { 
         margin: 10px auto 10px auto;

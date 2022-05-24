@@ -1,7 +1,7 @@
 import { loadMoreButton, loading, cardsWrapper, buttonScrollUp } from "./selectors.js";
 import { shuffle, displayCard, dataFetch, displayMore} from "./utils.js";
 
-export default function handleError(err) {
+export function handleError(err) {
     console.log("ERRRRRRRRROOOR");
     console.log(err);
     console.log("-----------------SEPARADOR-----------------");

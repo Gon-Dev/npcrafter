@@ -1,5 +1,5 @@
-import { loading, modalOuter, cardsWrapper, fullImage, loadMoreButton } from "./selectors.js";
-import handleError from "./handlers.js";
+import { loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
+import { handleError, handleScrollUpButton } from "./handlers.js";
 
 export function sayHi(name) {
     console.log(name);
@@ -35,6 +35,8 @@ export function displayCard(cardData) {
     return cardDiv;
 }
 export function displayFullCard (event) {
+    document.body.style.overflow = "hidden";
+    buttonScrollUp.style.opacity = 0;
     fullImage.src = "";
     const fullCardToShow = event.target.value;
     fullImage.src = fullCardToShow;
@@ -42,11 +44,12 @@ export function displayFullCard (event) {
     modalOuter.addEventListener('click', event => {
         const clickOutside = !event.target.closest('.full-image');
         clickOutside ? closeModal() : null;
+        buttonScrollUp.style.opacity = 100;
+        document.body.style.overflow = "auto"; 
     })
     window.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
           closeModal();
-          
         }
     })
 }

@@ -24,15 +24,22 @@ export function displayCard(cardData) {
     <img class="cardArt" src="${cardData.image_uris.art_crop}" alt="">
     <h1 class="cardName">"${cardData.name}"</h1>
     <h2 class="cardArtist">${cardData.artist} - ${cardData.frame} </h2>
-    <button class="cardSource" value=${cardData.image_uris.normal}>SOURCE CARD</button>
+    <div class="displayedCardButtonWrapper">
+        <button class="cardSource" value=${cardData.image_uris.normal}>SOURCE CARD</button>
+        <button class="createNpc">CREATE NPC</button>
+    </div>
     <div class="cardDivider"></div>
     `;
     cardDiv.className = "card";
-    const button = cardDiv.childNodes[7];
-    const fullCardUrl = cardData.image_uris.normal;
-    button.addEventListener('click', event => displayFullCard(event));
+    const sourceButton = cardDiv.children[3].children[0];
+    const createNpcButton = cardDiv.children[3].children[1];
+    createNpcButton.addEventListener('click', event => createNpc(event));
+    sourceButton.addEventListener('click', event => displayFullCard(event));
     cardsWrapper.insertAdjacentElement("beforeend",cardDiv);
     return cardDiv;
+}
+function createNpc(event) {
+    console.log(event);
 }
 export function displayFullCard (event) {
     document.body.style.overflow = "hidden";

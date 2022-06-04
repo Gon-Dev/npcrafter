@@ -1,4 +1,4 @@
-import { typeSearchButtons } from "./selectors.js";
-import { handleScrollUpButton, typeSearchHandler} from "./handlers.js"
+import { startButton } from "./selectors.js";
+import { startHandler, handleScrollUpButton } from "./handlers.js"
+startButton.addEventListener('click',startHandler);
 window.addEventListener('scroll', handleScrollUpButton);
-typeSearchButtons.forEach( button => button.addEventListener('click', () => typeSearchHandler(button)));

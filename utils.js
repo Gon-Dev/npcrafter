@@ -1,4 +1,4 @@
-import { loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
+import { npcForm, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
 import { handleError, handleScrollUpButton } from "./handlers.js";
 
 export function sayHi(name) {
@@ -15,13 +15,14 @@ export async function dataFetch(endpoint) {
     loading.style.display = "none";
     return data;
 }
-export function closeModal() {
-    modalOuter.classList.remove('open');
+export function closeModal(modal) {
+    modal.classList.remove('open');
 }
 export function displayCard(cardData) {
     const cardDiv = document.createElement("div");
+    const cropUrl = cardData.image_uris.art_crop;
     cardDiv.innerHTML = `
-    <img class="cardArt" src="${cardData.image_uris.art_crop}" alt="">
+    <img class="cardArt" src="${cropUrl}" alt="">
     <h1 class="cardName">"${cardData.name}"</h1>
     <h2 class="cardArtist">${cardData.artist} - ${cardData.frame} </h2>
     <div class="displayedCardButtonWrapper">
@@ -33,13 +34,23 @@ export function displayCard(cardData) {
     cardDiv.className = "card";
     const sourceButton = cardDiv.children[3].children[0];
     const createNpcButton = cardDiv.children[3].children[1];
-    createNpcButton.addEventListener('click', event => createNpc(event));
+    createNpcButton.addEventListener('click', () => createNpc(cropUrl));
     sourceButton.addEventListener('click', event => displayFullCard(event));
     cardsWrapper.insertAdjacentElement("beforeend",cardDiv);
     return cardDiv;
 }
-function createNpc(event) {
-    console.log(event);
+function createNpc(cropUrl) {
+    npcImg.src = "";
+    npcImg.src = cropUrl;
+    document.body.style.overflow = "hidden";
+    buttonScrollUp.style.opacity = 0;
+    npcFormWrapper.classList.add("open");
+    npcFormWrapper.addEventListener('click', event => {
+        const clickOutside = !event.target.closest(".npc-form-inner");
+        clickOutside ? closeModal(npcFormWrapper) : null;
+        buttonScrollUp.style.opacity = 100;
+        document.body.style.overflow = "auto";
+    })
 }
 export function displayFullCard (event) {
     document.body.style.overflow = "hidden";
@@ -50,14 +61,9 @@ export function displayFullCard (event) {
     modalOuter.classList.add('open');
     modalOuter.addEventListener('click', event => {
         const clickOutside = !event.target.closest('.full-image');
-        clickOutside ? closeModal() : null;
+        clickOutside ? closeModal(modalOuter) : null;
         buttonScrollUp.style.opacity = 100;
         document.body.style.overflow = "auto"; 
-    })
-    window.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-          closeModal();
-        }
     })
 }
 export async function displayMore(nextEndpoint) {
@@ -75,4 +81,3 @@ export async function displayMore(nextEndpoint) {
         return;
     }
 }
-

@@ -1,18 +1,20 @@
-import { links, landing, display, loadMoreButton, loading, cardsWrapper, buttonScrollUp } from "./selectors.js";
-import { shuffle, displayCard, dataFetch, displayMore} from "./utils.js";
+import { about, gallery, npcFormWrapper, nameNpc,keyInfoNpc,backgroundNpc,miscNpc, links, loadMoreButton, loading, cardsWrapper, buttonScrollUp } from "./selectors.js";
+import { shuffle, displayCard, dataFetch, displayMore, hideAll } from "./utils.js";
+import { npcList } from "./npcs.js";
 
 export function handleError(err) {
     console.log("ERRRRRRRRROOOR");
     console.log(err);
     console.log("-----------------SEPARADOR-----------------");
 }
-export function handleScrollUpButton(par) {
+export function handleScrollUpButton() {
     let yPosition = window.scrollY;
     yPosition > 1000 ? buttonScrollUp.style.opacity = 100 : buttonScrollUp.style.opacity = 0;
     buttonScrollUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 export async function startHandler() {
-    display.removeChild(landing);
+    hideAll();
+    gallery.style.display = "initial";
     loadMoreButton.style.display = "none";
     loading.style.display = "none";
     cardsWrapper.innerHTML = "";
@@ -28,4 +30,31 @@ export async function startHandler() {
 }
 export function handleHamburger() {
     links.style.maxHeight === "13rem" ? links.style.maxHeight = "0rem" : links.style.maxHeight = "13rem";
+}
+export function handleSaveNpc(event) {
+    const newNpc = {
+        name: nameNpc.value,
+        keyInfo: keyInfoNpc.value,
+        background: backgroundNpc.value,
+        misc: miscNpc.value,
+        srcImg: event.target.parentElement.parentElement.nextElementSibling.currentSrc,
+    }
+    npcList.push(newNpc);
+    localStorage.setItem(`${newNpc.name}`,JSON.stringify(newNpc));
+    npcFormWrapper.classList.remove('open');
+}
+export function handleNpcsButton() {
+    hideAll();
+}
+export function linkHandler(e) {
+    if (e.target.classList.contains("gallery-link")){
+        hideAll();
+        e.preventDefault();
+        startHandler();
+    } else if (e.target.classList.contains("about-link")) {
+        e.preventDefault();
+        hideAll();
+        about.style.display = "block";
+        console.log(about);
+    }
 }

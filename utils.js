@@ -1,5 +1,5 @@
-import { npcForm, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
-import { handleError, handleScrollUpButton } from "./handlers.js";
+import { npcTextareas, about, gallery, landing, saveNpc, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
+import { handleError, handleSaveNpc } from "./handlers.js";
 
 export function sayHi(name) {
     console.log(name);
@@ -40,6 +40,7 @@ export function displayCard(cardData) {
     return cardDiv;
 }
 function createNpc(cropUrl) {
+    npcTextareas.forEach( (textarea) => textarea.value = "" );
     npcImg.src = "";
     npcImg.src = cropUrl;
     document.body.style.overflow = "hidden";
@@ -51,6 +52,7 @@ function createNpc(cropUrl) {
         buttonScrollUp.style.opacity = 100;
         document.body.style.overflow = "auto";
     })
+    saveNpc.addEventListener('click', handleSaveNpc);
 }
 export function displayFullCard (event) {
     document.body.style.overflow = "hidden";
@@ -75,9 +77,12 @@ export async function displayMore(nextEndpoint) {
         const nextPageEndpoint = cardsList.next_page;
         loadMoreButton.value = nextPageEndpoint;
         loadMoreButton.style.display = "initial";
-        return;
     } else {
         loadMoreButton.style.display = "none";
-        return;
     }
+}
+export function hideAll() {
+    landing.style.display !== "none" ? landing.style.display = "none" : null;
+    gallery.style.display !== "none" ? gallery.style.display = "none" : null;
+    about.style.display !== "none" ? about.style.display = "none" : null;
 }

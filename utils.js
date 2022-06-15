@@ -1,9 +1,5 @@
-import { npcTextareas, about, gallery, landing, saveNpc, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
-import { handleError, handleSaveNpc } from "./handlers.js";
-
-export function sayHi(name) {
-    console.log(name);
-}
+import { discardNpc, myNpcsArticle, npcTextareas, about, gallery, landing, saveNpc, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
+import { handleDiscardNpc, handleError, handleSaveNpc } from "./handlers.js";
 export function shuffle(array) {
     array.sort((a, b) => 0.5 - Math.random());
 }
@@ -39,8 +35,15 @@ export function displayCard(cardData) {
     cardsWrapper.insertAdjacentElement("beforeend",cardDiv);
     return cardDiv;
 }
-function createNpc(cropUrl) {
+export function createNpc(cropUrl,name,keyInfo,background,misc) {
     npcTextareas.forEach( (textarea) => textarea.value = "" );
+    if (name !== undefined) {
+        const [textAreaName,textAreaKeyInfo,textAreaBackground,textAreaMisc] = npcTextareas;
+        textAreaName.value = name;
+        textAreaKeyInfo.value = keyInfo;
+        textAreaBackground.value = background;
+        textAreaMisc.value = misc;
+    }
     npcImg.src = "";
     npcImg.src = cropUrl;
     document.body.style.overflow = "hidden";
@@ -53,6 +56,7 @@ function createNpc(cropUrl) {
         document.body.style.overflow = "auto";
     })
     saveNpc.addEventListener('click', handleSaveNpc);
+    discardNpc.addEventListener('click', handleDiscardNpc);
 }
 export function displayFullCard (event) {
     document.body.style.overflow = "hidden";
@@ -85,4 +89,13 @@ export function hideAll() {
     landing.style.display !== "none" ? landing.style.display = "none" : null;
     gallery.style.display !== "none" ? gallery.style.display = "none" : null;
     about.style.display !== "none" ? about.style.display = "none" : null;
+    myNpcsArticle.style.display !== "none" ? myNpcsArticle.style.display = "none" : null;
+    return;
+}
+export function orderAtoZ(array) {
+    array.sort(function(a, b) {
+        var npcA = a.name.toUpperCase();
+        var npcB = b.name.toUpperCase();
+        return (npcA < npcB) ? -1 : (npcA > npcB) ? 1 : 0;
+    })
 }

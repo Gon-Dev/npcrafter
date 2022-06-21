@@ -13,6 +13,7 @@ export async function dataFetch(endpoint) {
 }
 export function closeModal(modal) {
     modal.classList.remove('open');
+    document.body.style.overflow = "auto";
 }
 export function displayCard(cardData) {
     const cardDiv = document.createElement("div");
@@ -51,9 +52,9 @@ export function createNpc(cropUrl,name,keyInfo,background,misc) {
     npcFormWrapper.classList.add("open");
     npcFormWrapper.addEventListener('click', event => {
         const clickOutside = !event.target.closest(".npc-form-inner");
+        console.log(clickOutside);
+
         clickOutside ? closeModal(npcFormWrapper) : null;
-        buttonScrollUp.style.opacity = 100;
-        document.body.style.overflow = "auto";
     })
     saveNpc.addEventListener('click', handleSaveNpc);
     discardNpc.addEventListener('click', handleDiscardNpc);

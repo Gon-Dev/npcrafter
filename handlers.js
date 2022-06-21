@@ -1,4 +1,4 @@
-import { myNpcsVisor, npcTextareas, myNpcsList, myNpcsArticle, about, gallery, npcFormWrapper, nameNpc,keyInfoNpc,backgroundNpc, miscNpc, links, loadMoreButton, loading, cardsWrapper, buttonScrollUp } from "./selectors.js";
+import { myNpcsVisor, myNpcsList, myNpcsArticle, about, gallery, npcFormWrapper, nameNpc,keyInfoNpc,backgroundNpc, miscNpc, links, loadMoreButton, loading, cardsWrapper, buttonScrollUp } from "./selectors.js";
 import { orderAtoZ, shuffle, displayCard, dataFetch, displayMore, hideAll, createNpc } from "./utils.js";
 import { npcList } from "./npcs.js";
 export function handleError(err) {
@@ -40,7 +40,9 @@ export function handleSaveNpc(event) {
     }
     npcList.push(newNpc); // npcList -> module with the current npcs created
     localStorage.setItem(`${newNpc.name}`,JSON.stringify(newNpc));
-    npcFormWrapper.classList.remove('open');
+    handleDiscardNpc();
+    hideAll();
+    handleNpcsButton();
 }
 function getAllFromStorage() {
     myNpcsList.innerHTML = "";
@@ -52,20 +54,15 @@ function getAllFromStorage() {
     });
     return myNpcsArray;
 }
-function handleNpcEdit(e) {
+async function handleNpcEdit(e) {
     // selecciona datos vigentes de npc
     const npcName = e.currentTarget.parentElement.parentElement.children[0].children[0].children[0].textContent;
     const npcKeyInfo = e.currentTarget.parentElement.parentElement.children[0].children[0].children[2].textContent;
     const npcImg = e.currentTarget.parentElement.parentElement.children[0].children[1].src;
     const npcBackground = e.currentTarget.parentElement.parentElement.children[2].children[1].textContent;
     const npcMisc = e.currentTarget.parentElement.parentElement.children[2].children[3].textContent;
-    // abrir panel de edicion de npc
-    // seleccionar campos para edicion y que aparezcan con el texto existente
-    createNpc(npcImg,npcName,npcKeyInfo,npcBackground,npcMisc);
-    //npcTextareas.forEach( (area) => console.log(area)); // destructuring
-    // borrar en localStorage el ya almacenado con datos viejos
-    // guardar en localStorage el mismo npc con datos nuevos
 
+    createNpc(npcImg,npcName,npcKeyInfo,npcBackground,npcMisc);
 }
 function handleNpcDelete(e) {
     const npcName = e.currentTarget.parentElement.parentElement.children[0].children[0].children[0].textContent;
@@ -109,12 +106,14 @@ function displayNpcVisor(e) {
     npcDeleteButton.addEventListener('click', e => handleNpcDelete(e));
 }
 function displayNpcList(npc) {
+    myNpcsVisor.innerHTML = "";
     const npcItemWrapper = document.createElement("li");
     npcItemWrapper.innerHTML = `
         <p class="npcListItemName">${npc.name}</p>
         <img class="npcListImg" src="${npc.srcImg}" alt="npc thumbnail">
     `;
     npcItemWrapper.classList.add("npcListItem");
+
     npcItemWrapper.addEventListener('click', e => displayNpcVisor(e));
     myNpcsList.appendChild(npcItemWrapper);
 }

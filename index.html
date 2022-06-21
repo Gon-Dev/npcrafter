@@ -47,28 +47,6 @@
                 </div>
                 <img class="hero-img" src="https://picsum.photos/400?random=1" alt="">
             </section>
-            <section class="steps-wrapper">
-                <img class="hero-img" src="https://picsum.photos/400?random=2" alt="">
-                <div class="steps">
-                    <button autofocus="true" class="step">
-                        <div class="step-number">1</div>
-                        <p class="step-description">Browse the gallery for random illustrations</p>
-                    </button>
-                    <button class="step">
-                        <div class="step-number">2</div>
-                        <p class="step-description">Pick one of your interest and let the craft begin !</p>
-                    </button>
-                    <button class="step">
-                        <div class="step-number">3</div>
-                        <p class="step-description">Fullfil the NPC life sheet and save it</p>
-                    </button>
-                    <button class="step">
-                        <div class="step-number">4</div>
-                        <p class="step-description">He/She will be waiting for the party in "My NPCs" section</p>
-                    </button>
-                </div>
-
-            </section>
         </article>
         <article class="gallery">
             <div class="cards-wrapper"></div>
@@ -94,15 +72,15 @@
                     <input maxlength="45" class="name textarea" type="text" placeholder="Bobblin, the Goblin"></input>
             
                     <label for="key-info">KEY INFORMATION</label>
-                    <input class="key-info textarea" maxlength="200" class="key-info" type="text" placeholder="3ft tall, friendly, always speak loud."></input>
+                    <textarea class="key-info textarea" maxlength="200" class="key-info" type="text" placeholder="3ft tall, friendly, always speak loud."></textarea>
             
                     <label for="background">BACKGROUND AND GOALS</label>
                     <div class="text-area-wrapper">
-                        <input maxlength="500" class="background textarea" type="text" placeholder="Born in Rawrblarg, wants to rule the world and erase kobolds from existence."></input>
+                        <textarea maxlength="500" class="background textarea" type="text" placeholder="Born in Rawrblarg, wants to rule the world and erase kobolds from existence."></textarea>
                     </div>
             
-                    <label for="misc">PARTY RELATIONSHIP</label>
-                    <input maxlength="500" class="misc textarea" type="text" placeholder="Fighted the party and escaped almost dead. Currently planning to ambush them in the woods."></input>
+                    <label for="misc">MISCELANEOUS</label>
+                    <textarea maxlength="500" class="misc textarea" type="text" placeholder="Fighted the party and escaped almost dead. Currently planning to ambush them in the woods."></textarea>
             
                     <div class="npc-button-wrapper">
                             <button class="discard">DISCARD</button>
@@ -131,9 +109,6 @@
             </span>
             <div class="npc-visor"></div>
         </article>
-        <footer class="footer">
-            <p>Minmaxed by Goni 🐉</p>
-        </footer>
     </main>
     <script src="./selectors.js" type="module"></script>
     <script src="./handlers.js" type="module"></script>

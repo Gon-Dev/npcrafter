@@ -1,191 +1,161 @@
 :root {
-    --color-alto: hsla(37, 24%, 81%,1);
-    --color-alto-transparante: hsla(37, 24%, 81%,0.9);
-    --color-alto-alternativo-menos-transparente: hsla(174, 20%, 72%, 0.5);    --color-bajo: hsla(223, 14%, 30%, 1);
-    --color-bajo-transparente: hsla(223, 14%, 30%, 0.5);
-    --color-desaturado: #8f3d55;
-    --color-desaturado-transparente: hsla(342, 40%, 40%, 0.25);
-    --color-desaturado-menos-transparente: hsla(342, 40%, 40%, 0.5);
-    --color-saturado: #ca314a;
-    --texto-gris: hsla(130, 100%, 0%, 0.87);
-    --fondo-gris: hsla(130, 100%, 0%, 1);
-    --sombra-texto: 0px 0px 4px rgba(56,25,47,0.1);
-    --sombra-caja: 0px 0px 5px 1px rgba(56,25,47,0.1);
-    --boton-inactivo: hsla(223, 20%, 53%, 0.2);
-    --boton-hover: hsla(223, 20%, 53%, 0.5);
-    --boton-activo: hsla(223, 20%, 53%, 1);
-    --svg-color-alto: invert(97%) sepia(6%) saturate(853%) hue-rotate(324deg) brightness(90%) contrast(88%);
+    --bright-gray: rgba(238, 238, 238, 1);
+    --bunker: rgba(34, 40, 49, 1);
+    --cloud-burst: rgba(57, 62, 70, 1);
+    --strong-cyan: rgba(0,173,181,1);
+    --sombra-texto: 0px 0px 4px rgba(56,25,47,0.15);
+    --sombra-caja: 0px 0px 5px 1px rgba(56,25,47,0.15);
     
-    --violeta-bajo: #38192f;
-    --violeta-bajo-desaturado: #71455d;
-    --bordeaux: #8f3d55;
-    --carmesi: #ca314a;
-    --celeste: #aac6c3;
-    --amarillo: #dad1c3;
 }
-
-@media (min-width:1025px) {
-    body {
-        scroll-behavior: smooth;
-        margin: 0;
-        width: 100%;
-        min-height: 100vh;
-        font-family: 'Cinzel', sans-serif;
-        background-color: var(--color-alto);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    /*HEADER BAR*/
+.flex-column-centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flex-row-centered {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+body {
+    margin: 0;
+    width: 100%;
+    font-family: 'Play', sans-serif;
+    background-color: var(--cloud-burst);
+    color: var(--bright-gray);
+    scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+    background-color: var(--bunker);
+    width: 15px;
+    height: 0px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--bright-gray);
+    width: 10px;
+    height: 40px;
+    border-radius: 2px;
+}
+.hero-button:active, .scroll-to-top:active,.cardSource:active,.createNpc:active, .discard:active,.save:active {
+    transform: scale(85%);
+    background-color: var(--bright-gray);
+}
+.discard:active { background: none;}
+.hamburger-svg { padding: 0.9rem; }
+.hamburger-svg:active,.my-npcs-wrapper:active{
+    transform: scale(85%);
+}
+.link-separator {
+    border-bottom: 1px solid var(--bright-gray);
+    margin-left: 1rem;
+    width: 50%;
+}
+.loading { margin: 3rem auto auto auto; align-self: center;}
+.links { font-family: 'Play', sans-serif; }
+.hamburger-svg,.my-npcs-svg,.arrow-up { filter: invert(98%) sepia(4%) saturate(145%) hue-rotate(245deg) brightness(116%) contrast(87%); }
+.npcEdit:hover, .npcDelete:hover { cursor: pointer; }
+.npcEdit:active, .npcDelete:active,.discard:active,.save:active, .confirm-delete-no:active,.confirm-delete-yes:active, .load-more:active { transform: scale(90%); }
+@media (min-width:320px) {
+    /* TOP BAR */
     .header {
-        background-color: var(--color-bajo);
-        height: 4rem;
         width: 100%;
-        position: fixed;
-        display: flex;
-        flex-direction: row;
+        height: 4rem;
         justify-content: space-between;
-        align-items: center;
+        background-color: var(--bunker);
+        position: fixed;
         top: 0;
         box-shadow: var(--sombra-caja);
     }
-    .hamburger {
-        width: 2rem;
+    .title {
+        font-size: 2.75rem;
+        text-shadow: var(--sombra-texto);
+    }
+    /* NAV MENU */
+    .hamburger,.my-npcs-wrapper {
+        border: none;
+        background-color: var(--bunker);
+        margin: 0;
+        padding: 0;
+    }
+    .hamburger-svg,.my-npcs-svg {
         height: 2rem;
-        padding-left: 2rem;
-        cursor: pointer;
+        width: 2rem;
     }
-    .hamburger-svg:active,.my-npcs:active {
-        transform: scale(90%);
+    .hamburger-svg { margin-left: 1rem;}
+    .my-npcs-svg { 
+        margin-right: 1rem;
+        transform: scale(140%);
     }
-    .hamburger-svg { filter: var(--svg-color-alto); }
     .links {
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
         position: absolute;
+        align-items: flex-start;
         left: 0;
-        width: 12rem;
+        top: 4rem;
+        width: 8rem;
+        height: 9rem;
         max-height: 0rem;
-        background-color: var(--color-bajo);
+        background-color: var(--bunker);
         transition: max-height 0.5s;
         margin: 0;
         padding: 0.3rem auto 0.5rem auto;
+        gap: 0.75rem;
     }
-    .ham-item {
+    .link {
         text-decoration: none;
-        font-size: 1.1rem;
-        margin: 1rem auto 1rem 2rem;
-        color: var(--color-alto);
-        transition: text-shadow 0.2s;
+        font-size: 1rem;
+        margin-left: 1rem;
+        color: var(--bright-gray);
+        text-shadow: var(--sombra-texto);
     }
-    .ham-item:hover { text-shadow: 0px 0px 1rem var(--color-alto); }
-    .link-separator {
-        border-bottom: 1px solid var(--color-alto);
-        margin-left: 2rem;
-        margin-right: auto;
-        width: 50%;
+    /* HOME */
+    .arrow-right {
+        width: 0.8rem;
+        margin-left: 0.5rem;
     }
-    .title {
-        color: var(--color-alto);
-        font-size: 3rem;
-        text-shadow: 1px 1px 20px var(--sombra-texto);
-        font-family: 'Cinzel', serif;
-        margin: 0;
-    }
-    .my-npcs-wrapper { padding: 1rem; }
-    .my-npcs {
-        width: 40px;
-        padding-right: 2rem;
-        filter: var(--svg-color-alto);
-        width: 3rem;
-        height: 3rem;
-        cursor: pointer;
-    }
-    .display {
-        width: 100%;
+    .hero-wrapper{
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
-    }
-    .landing { display: block; }
-    .hero-wrapper {
-        width: 100%;
-        margin-top: 1rem;
-        font-family: 'Josefin Sans', sans-serif;
-        display: grid;
-        grid-template-columns: auto auto;
         align-items: center;
-        gap: 3rem;
-    }
-    .hero-text-container { 
-        width: 35rem;
-        text-shadow: var(--sombra-texto);
-        color: var(--texto-gris);
     }
     .hero-title {
-        width: 30rem;
-        font-size: 2.5rem;
-        margin: 0 auto 1.5rem 0;
-    }
-    .hero-description { 
-        font-size: 1.25rem;
-        color: var(--texto-gris);
-        margin: 1rem auto 1.5rem auto;
-    }
-    .arrow-right {
-        height: 1rem;
-        margin-left: 1rem;
-        margin-right: -0.5rem;
+        margin-top: 3rem;
+        font-size: 2rem;
+        text-align: center;
+        text-shadow: var(--sombra-texto);
     }
     .hero-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 4rem 3rem auto auto;
-        width: 13rem;
-        height: 3.5rem;
-        font-size: 1.1rem;
-        font-family: 'Cinzel', sans-serif;
-        font-weight: bold;
-        color: var(--texto-gris);
+        width:10rem;
+        height: 2.5rem;
+        align-self: flex-end;
+        margin-right: 2rem;
         border: none;
         border-radius: 5px;
-        background-color: var(--boton-inactivo);
+        font-family: inherit;
+        font-size: 1rem;
+        background-color: var(--strong-cyan);
+        text-shadow: var(--sombra-texto);
         box-shadow: var(--sombra-caja);
-        transition: background-color 0.15s;
     }
-    .hero-button:hover {
-        background-color: var(--boton-hover);
-        cursor: pointer;
-    }
-    .hero-button:active { 
-        transform: translate(2px,2px);
-        background-color: var(--boton-activo);
-    }
-    .hero-img { 
-        width: 25rem;
+    .hero-img {
+        width: 20rem;
+        margin-top: 2rem;
         box-shadow: var(--sombra-caja);
-        border-radius: 15px;
+        border-radius: 10px;
     }
-    .about {
-        display: none;
-        width: 80%;
-        margin: 6rem auto 4rem auto;
-        font-family: 'Josefin Sans', sans-serif;
-        color: var(--texto-gris);
-        font-size: 1.1rem;
+    .hero-description {
+        text-align: center;
+        margin-top: 0rem;
+        font-size: 1.2rem;
+        text-shadow: var(--sombra-texto);
+        font-weight: normal;
     }
-    .about-title { margin: 3rem auto 1rem auto; }
-    a {
-        text-decoration: none;
-        color: var(--color-saturado);
-    }
-    /*GALLERY*/
-    .gallery { display: none; }
+    /* HOME WRAPPER */
+    .landing { margin: 3rem auto 1rem auto; }
+    /* GALLERY */
     .cards-wrapper { margin-top: 7rem; }
     .loading {
         display: none;
@@ -195,21 +165,18 @@
     }
     .load-more {
         display: none;
-        margin-bottom: 2rem;
+        margin: 3rem auto 3rem auto;
         border-radius: 0;  
-        background-color: var(--color-alto-alternativo-menos-transparente); 
+        background-color: var(--strong-cyan);
         border: none; 
-        width: 100%;   
+        width: 10rem;   
         height: 50px; 
-        font-family: 'Josefin Sans', sans-serif;
-        text-shadow: 0px 0px 15px 15px rgba(8,8,8,0.15);
+        font-family: 'Play', sans-serif;
         font-weight: bold;
         font-size: 20px;
-        box-shadow: 0px 1px 5px 3px rgba(8,8,8,0.2);
-    }
-    .load-more:active {
-        background-color: var(--color-alto-alternativo);
-        color: var(--color-bajo);
+        box-shadow: var(--sombra-caja);
+        color: var(--bunker);
+        text-shadow: var(--sombra-texto);
     }
     .scroll-to-top {
         transition: all 0.3s;
@@ -220,26 +187,22 @@
         bottom: 1rem;
         right: 1rem;
         box-shadow: var(--sombra-caja);
-        background-color: var(--boton-hover);
+        background-color: var(--bunker);
         border: none;
         border-radius: 10px;
         padding: 15px;
-    }
-    .arrow-up{ filter: invert(94%) sepia(2%) saturate(6542%) hue-rotate(310deg) brightness(102%) contrast(123%); }
-    .scroll-to-top:active {
-        transform: scale(90%);
-        background-color: var(--boton-activo);
     }
     .card {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 0.3rem;
-        text-shadow: 1px 1px 20px hsla(232, 27%, 9%,0.15);
+        text-shadow: var(--sombra-texto);
     }
     .cardArt{ 
-        width: 35vw; 
-        box-shadow: 0px 0px 15px hsla(232, 27%, 9%, 0.2);
+        width: 23rem; 
+        box-shadow: var(--sombra-caja);
+        border-radius: 2px;
     }
     .displayedCardButtonWrapper {
         display: flex;
@@ -247,66 +210,43 @@
         gap: 2rem;
         margin-top: 1rem;
     }
-    .cardSource {
-        width: 6.5rem;
-        height: 2rem;
-        display: block;
-        border: none;
-        font-size: 0.75rem;
-        background-color: var(--boton-inactivo); 
-        color: hsla(60, 2%, 18%, 0.5);
-        box-shadow: var(--sombra-caja); 
-        border-radius: 5px;
-        font-family: 'Josefin Sans', sans-serif;
-        cursor: pointer;
-    }
-    .createNpc {
-        width: 6.5rem;
-        height: 2rem;
-        display: block;
-        border: none;
-        font-size: 0.75rem;
-        color: hsla(60, 2%, 18%, 0.5);
-        box-shadow: var(--sombra-caja); 
-        background-color: var(--boton-inactivo);
-        border-radius: 5px;
-        font-family: 'Josefin Sans', sans-serif;
-        cursor: pointer;
-    }
-    .cardSource:hover,.createNpc:hover {
-        background-color: var(--boton-hover);
-        box-shadow: 1px 1px 5px hsla(223, 20%, 53%, 0.7);
-        color: hsla(60, 2%, 18%, 0.7);
-    }
-    .cardSource:active,.createNpc:active {
-        background-color: var(--boton-activo); 
-        color: hsla(60, 2%, 18%, 0.9);
-        transform: translateY(1px);
-    }
     .cardName { 
         text-align: center;
         font-size: 20px; 
         font-weight: bold;
         margin-top: 1rem;
+        text-shadow: var(--sombra-texto);
     }
     .cardArtist { 
         margin: auto auto 10px auto;
         font-size: 16px;
         text-align: center;
         font-weight: normal;
+        text-shadow: var(--sombra-texto);
     }
     .cardDivider {
         width: 60%;
-        margin: 5rem auto 6rem auto;
-        border-top: solid 2px var(--color-bajo);
+        border-top: solid 2px var(--bright-gray);
+        margin: 3rem;
+        box-shadow: var(--sombra-caja);
     }
+    .cardSource,.createNpc,.confirm-delete-no,.confirm-delete-yes{
+        width: 8rem;
+        height: 2rem;
+        border: none;
+        border-radius: 5px;
+        font-family: inherit;
+        font-size: 1rem;
+        background-color: var(--strong-cyan);
+    }
+    /* CREATE NPC */
     .full-image-outer,.npc-form-wrapper {
         top: 0;
         left: 0;
         position: fixed;
         width: 100%;
         height: 100vh;
-        background: hsla(223, 14%, 30%, 0.9);
+        background: rgba(34, 40, 49, 0.9);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -325,82 +265,70 @@
         min-height: auto;
     }
     .npc-form-inner {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: 1.5rem;
         background-color: var(--color-bajo);
-        padding: 1.5rem;
+        padding: 0;
         border-radius: 5px;
     }
-    .npc-form-wrapper{ background-color: hsla(217, 43%, 7%, 0.87); }
     .npc-img {
-        width: 25rem;
-        margin-top: 1.1rem;
-        border-radius: 5px;
-        box-shadow: var(--sombra-caja);
+        display: none;
     }
     .npc-form {
         border-radius: 5px;
         font-weight: bold;
         padding: 1.5rem;
-        width: 25rem;
+        width: 20rem;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        color: var(--texto-gris);
         text-shadow: var(--sombra-texto);
-        box-shadow: var(--sombra-caja);
         margin: 0;
-        background-color: var(--color-alto-transparante);
+        background-color: rgba(238, 238, 238, 0.2);
+        border: 2px solid var(--bright-gray);
     }
     .npc-legend {
         text-align: center;
-        font-size: 1rem;
+        font-size: 1.5rem;
         margin-left: auto;
         margin-right: auto;
         padding: 0.3rem;
-        background-color: var(--fondo-gris);
-        color: var(--color-alto);
     }
     .name::placeholder { opacity: 0.75; }
-    .npc-img, .npc-form,.textarea,.name,.discard,.save {
+    .textarea,.name,.discard,.save {
         box-shadow: var(--sombra-caja);
         border: none;
     }
     .textarea {
-        height: 4rem;
+        height: 2rem;
         resize: none;
         width: 100%;
         overflow: hidden;
         border-radius: 5px;
-        font-family: 'Helvetica', serif;
+        font-family: 'Josefin Sans', sans-serif;
         word-break: break-word;
     }
     .name { 
         border-radius: 5px; 
-        font-family: 'Helvetica', serif; 
         height: 1.5rem;
     }
     .textarea::placeholder { opacity:0.75; }
-    .npc-button-wrapper{ margin: 1rem 0rem 0.5rem auto; }
-    .discard,.save{
+    .npc-button-wrapper { margin: 1rem 0rem 0.5rem auto; }
+    .discard,.save {
         width: 6rem;
         height: 2rem;
         border-radius: 5px;
-        color: var(--texto-gris);
-        font-family: 'Cinzel', serif;
+        color: var(--bunker);
         font-weight: bold;
         cursor: pointer;
+        background-color: var(--strong-cyan);
+        box-shadow: var(--sombra-caja);
     }
     .discard {
-        background-color: var(--color-desaturado-transparente);
         margin-right: 0.5rem;
+        background: none;
+        border: 1px solid var(--bright-gray);
+        color:  var(--bright-gray);
     }
-    .save { background-color: #C3FCF2; }
-    .discard:hover { background-color: var(--color-desaturado-menos-transparente); }
-    .save:hover { background-color: #86ada6; }
     .expand-textarea {
         margin: auto 0 auto 0.5rem;
         width: 2rem;
@@ -409,103 +337,299 @@
         border: none;
         margin-left: auto;
         margin-right: auto;
+        box-shadow: var(--sombra-caja);
     }
+    /* ABOUT */
+    .about { margin: 7rem 1rem 1rem 1rem; }
+    .about-title { margin-bottom: 0.5rem; font-size: 1.25rem;}
+    .about-text { margin-top: 0.5rem;}
+    .about a { color: var(--strong-cyan); }
+    /* MY NPCs */
     .my-npcs-article {
-        display: none;
-        flex-direction: row;
-        justify-content:space-around;
-        align-items: center;
         width: 100%;
-        height: 84.25vh;
+        height: 88vh;
         margin-top: 5rem;
     }
     .npc-list-wrapper {
-        width: 40%;
-        height: 90%;
+        width: 95%;
+        height: 15rem;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         align-items: center;
-        margin-left: 3rem;
+        margin: 0.5rem;
+        background-color: rgba(238, 238, 238, 0.2);
+        border-radius: 5px;
     }
     .npc-list-title {
         text-align: center;
-        font-size: 2rem;
-        margin: 1rem auto 0.5rem auto;
+        font-size: 1.2rem;
+        margin: 0.5rem auto 0.5rem auto;
+        text-shadow: var(--sombra-texto);
     }
     .npc-list {
+        margin: 0 0 0.5rem 0;
         overflow-y: scroll;
         width: 90%;
-        height: 90%;
         list-style: none;
         flex-direction: column;
-        padding-left: 0;
+        padding: 0rem;
+        background-color: rgba(238, 238, 238, 0.2);
+        border-radius: 5px;
+        box-shadow: var(--sombra-caja);
     }
     .npcListItem {
-        display: flex;
-        flex-direction: row;
         justify-content: space-between;
-        align-items: center;
-        margin: 1rem;
+        margin: 0.5rem;
         padding: 0.5rem;
         gap: 2rem;
+        text-shadow: var(--sombra-texto);
+        box-shadow: var(--sombra-caja);
     }
-    .npcListItem:hover { background-color: var(--color-bajo-transparente);}
     .npcListItemName {
         margin: 0;
         width: 15rem;
         word-wrap: break-word;
+        color: var(--bunker);
+        font-weight: bold;
+        text-transform: uppercase;
+        text-shadow: var(--sombra-texto);
     }
     .npcListImg {
-        width: 5rem;
-        height: 5rem;
+        width: 2rem;
+        height: 2rem;
+        box-shadow: var(--sombra-caja);
+        border-radius: 5px;
     }
     .npc-visor {
-        margin: 2rem;
-        height: 90%;
-        width: 60%;
+        margin: 0.5rem;
+        width: 94%;
         display: grid;
         grid-template-rows: 2, 1fr ;
         overflow-y: scroll;
+        border-radius: 5px;
+        background-color: rgba(238, 238, 238, 0.2);
+        text-shadow: var(--sombra-texto);
+        box-shadow: var(--sombra-caja);
     }
-    .npcVisorCard { height: 86vh; }
     .npcVisorHeader {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        height: 35%;
         text-align: center;
-        margin-top: 2rem;
     }
     .npcVisorSeparator {
         width: 60%;
-        border-top: black 1px solid;
-        margin: 3rem auto 2rem auto;
+        border-top: var(--bright-gray) 1px solid;
+        margin: 1rem auto 1rem auto;
     }
     .npcVisorTitle {
-        width: 60%;
-        margin: 0 1rem 1rem 1rem ;
+        width: 90%;
+        margin: 0 1rem 0.5rem 1rem ;
     }
-    .npcVisorKeyInfo { margin: 0 auto 0 auto; }
-    .npcVisorKeyInfoText { margin-top: 0.5rem; }
+    .npcVisorName {
+        font-size: 2rem;
+    }
+    .npcVisorKeyInfoText { font-size: 1.2rem; }
     .npcVisorImg {
-        margin: 1rem;
-        height: 130%;
+        margin: 0;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: var(--sombra-caja);
     }
     .npcVisorBackground,.npcVisorMisc,.npcVisorKeyInfo{
         text-align: center;
-        font-size: 1.1rem;
-        margin: 1rem auto 0 auto;
+        font-size: 1.5rem;
+        margin: 0.5rem;
+        text-shadow: var(--sombra-texto);
     }
-    .npcVisorBackgroundText,.npcVisorMiscText { margin: 1rem; }
+    .npcVisorBackgroundText,.npcVisorMiscText {
+        margin: 0.5rem; 
+        text-align: center; 
+        text-shadow: var(--sombra-texto);
+    }
     .npcButtonsWrapper {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         gap: 1rem;
         margin: 1rem;
+    }
+    .npcEdit, .npcDelete {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: var(--strong-cyan);
+        box-shadow: var(--sombra-caja);
+    }
+    .editButtonSvg { width: 80%;}
+    .deleteButtonSvg { width: 90%; }
+    .gallery,.about,.my-npcs-article { display: none;}
+    .confirm-delete-outer {
+        display: none;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(57, 62, 70, 0.87);
+    }
+    .confirm-delete-wrapper {
+        width: 22rem;
+        height: 15rem;
+        border: solid 1px var(--bright-gray);
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+        border-radius: 5px;
+        background-color: rgba(238, 238, 238, 0.25);
+    }
+    .confirm-delete-title, .confirm-delete-text {
+        margin: 0.5rem;
+    }
+    .confirm-delete-title {
+        font-weight: bold;
+        margin-top: 1rem;
+        font-size: 2rem;
+    }
+    .confirm-delete-button-wrapper {
+        gap: 3rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+    .confirm-delete-yes {
+        background: none;
+        border: solid 1px var(--bright-gray);
+        color: var(--bright-gray);
+    }
+}
+
+@media (min-width:1025px) {
+    /* HEADER */
+    .header {
+        height: 5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    /* NAV MENU */
+    .hamburger-svg,.my-npcs-svg {
+        height: 2.5rem;
+        width: 2.5rem;
+        filter: invert(98%) sepia(4%) saturate(145%) hue-rotate(245deg) brightness(116%) contrast(87%);
+    }
+    .hamburger-svg { margin-left: 2rem;}
+    .my-npcs-svg { 
+        margin-right: 2rem;
+        transform: scale(140%);
+    }
+    .title { font-size: 3rem;}
+    .links {
+        top: 5rem;
+        height: 20rem;
+        width: 10rem;
+        gap: 1.25rem;
+    }
+    .link { font-size: 1.25rem; }
+    /* LANDING */
+    .hero-wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        margin-top:10rem;
+        font-size: 1.5rem;
+    }
+    .hero-title {
+        width: 40rem;
+        margin-top: 0;
+        font-size: 2rem;
+    }
+    .hero-text-container {
+        width: 30rem;
+    }
+    .hero-img {
+        margin: 0;
+        width: 30rem;
+    }
+    /* NPC CREATION */
+    .npc-img {
+        display: flex;
+        border-radius: 5px;
+        border: 2px solid var(--bright-gray);
+    }
+    .textarea {
+        height: 4rem;
+    }
+    .name { 
+        height: 1.5rem;
+    }
+    /* MY NPCS */
+    .my-npcs-article { 
+        flex-direction: row;
+        height: 87vh;
+    }
+    .npc-list-wrapper {
+        width: 40%;
+        height: 90%;
+        justify-content: flex-start;
+    }
+    .npc-list { height: 90%; }
+    .npc-list-title {
+        font-size: 2rem;
+        margin: 1rem auto 0.5rem auto;
+    }
+    .npcListItem {
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .npcListItem:hover { background-color: rgba(238, 238, 238, 0.2);}
+    .npcListItemName {
+        width: 25rem;
+        cursor:default;
+    }
+    .npcListImg {
+        width: 5rem;
+        height: 5rem;
+    }
+    .npc-visor {
+        margin:1rem;
+        height: 90%;
+        width: 80%;
+        display: grid;
+    }
+    .npcVisorCard { height: 86vh; padding: 1rem; }
+    .npcVisorHeader {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        text-align: center;
+    }
+    .npcVisorTitle {
+        width: 70%;
+        margin: 1rem;
+    }
+    .npcVisorName { margin-top: 1rem;}
+    .npcVisorKeyInfo { margin: 0 auto 0 auto; }
+    .npcVisorKeyInfoText { margin-top: 0.5rem; }
+    .npcVisorImg {
+        margin: 1rem;
+        width: 22rem;
+    }
+    .npcButtonsWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin: 0rem;
     }
     .npcEdit, .npcDelete {
         width: 3rem;
@@ -517,8 +641,6 @@
         border: none;
         background-color: none;
     }
-    .npcEdit:hover, .npcDelete:hover { cursor: pointer; }
-    .npcEdit:active, .npcDelete:active,.discard:active,.save:active { transform: scale(90%); }
     .editButtonSvg { width: 60%;}
     .deleteButtonSvg { width: 75%; }
 }

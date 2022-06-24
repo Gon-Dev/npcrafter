@@ -1,19 +1,28 @@
-import { discardNpc, myNpcsArticle, npcTextareas, about, gallery, landing, saveNpc, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
+import { heroImg, discardNpc, myNpcsArticle, npcTextareas, about, gallery, landing, saveNpc, npcImg, npcFormWrapper, loading, modalOuter, cardsWrapper, fullImage, loadMoreButton, buttonScrollUp } from "./selectors.js";
 import { handleDiscardNpc, handleError, handleSaveNpc } from "./handlers.js";
 export function shuffle(array) {
     array.sort((a, b) => 0.5 - Math.random());
 }
 export async function dataFetch(endpoint) {
-    loading.style.display = "inherit";
+    loading.style.display = "block";
     setTimeout(100);
     const response = await fetch(endpoint).catch(handleError);
     const data = await response.json();
     loading.style.display = "none";
     return data;
 }
+export async function loadLandingRandomImg() {
+    const randomCardEndpoint = "https://api.scryfall.com/cards/random?q=format:standard";
+    const randomCardRequest = await dataFetch(randomCardEndpoint);
+    const randomCardImg = randomCardRequest.image_uris.art_crop;
+    heroImg.src = randomCardImg;
+}
+export function restoreScroll() {
+    document.body.style.overflow = "scroll";
+}
 export function closeModal(modal) {
+    restoreScroll();
     modal.classList.remove('open');
-    document.body.style.overflow = "auto";
 }
 export function displayCard(cardData) {
     const cardDiv = document.createElement("div");
@@ -52,8 +61,6 @@ export function createNpc(cropUrl,name,keyInfo,background,misc) {
     npcFormWrapper.classList.add("open");
     npcFormWrapper.addEventListener('click', event => {
         const clickOutside = !event.target.closest(".npc-form-inner");
-        console.log(clickOutside);
-
         clickOutside ? closeModal(npcFormWrapper) : null;
     })
     saveNpc.addEventListener('click', handleSaveNpc);
@@ -81,7 +88,7 @@ export async function displayMore(nextEndpoint) {
         cardsArray.forEach( (card) =>  card.image_uris !== undefined ? displayCard(card) : null);
         const nextPageEndpoint = cardsList.next_page;
         loadMoreButton.value = nextPageEndpoint;
-        loadMoreButton.style.display = "initial";
+        loadMoreButton.style.display = "block";
     } else {
         loadMoreButton.style.display = "none";
     }

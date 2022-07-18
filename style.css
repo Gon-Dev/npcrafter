@@ -55,7 +55,7 @@ body::-webkit-scrollbar-thumb {
 .loading { margin: 3rem auto auto auto; align-self: center;}
 .links { font-family: 'Play', sans-serif; }
 .hamburger-svg,.my-npcs-svg,.arrow-up { filter: invert(98%) sepia(4%) saturate(145%) hue-rotate(245deg) brightness(116%) contrast(87%); }
-.npcEdit:hover, .npcDelete:hover { cursor: pointer; }
+.npcEdit:hover, .npcDelete:hover, .confirm-delete-yes:hover, .confirm-delete-no:hover { cursor: pointer; }
 .npcEdit:active, .npcDelete:active,.discard:active,.save:active, .confirm-delete-no:active,.confirm-delete-yes:active, .load-more:active { transform: scale(90%); }
 @media (min-width:320px) {
     /* TOP BAR */

@@ -72,7 +72,7 @@ function handleNpcDelete(e) {
     confirm.innerHTML = `
     <div class="confirm-delete-wrapper ">
         <p class="confirm-delete-title">DANGER !</p>
-        <p class="confirm-delete-text">You are about to erase your NPC forever <br> forever<br> forever</p>
+        <p class="confirm-delete-text">You are about to erase your NPC FOREVER</p>
         <div class="confirm-delete-button-wrapper flex-row-centered">
             <button value="${npcName}"class="confirm-delete-yes">DELETE</button>
             <button class="confirm-delete-no">KEEP IT</button>

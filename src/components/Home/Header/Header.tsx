@@ -5,7 +5,7 @@ import User from './User/User'
 function Header() {
   return(
     <header className='header-wrapper'>
-      <h1 className='header-title'>NpCrafter</h1>
+      <h2 className='header-title'>NpCrafter</h2>
       <Navbar />
       <User />
     </header>

@@ -21,7 +21,7 @@
   --space-cadet: hsla(235, 63%, 15%, 1);
   --shadow-default-white: 3px 3px 0px var(--white);
   --shadow-default-black: 3px 3px 0px var(--black);
-  background-color: var(--space-cadet);
+  background-color: #6d6d6d;
   color: var(--white);
 }
 html {
@@ -32,4 +32,8 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.rpgui-content * {
+  position: initial;
 }

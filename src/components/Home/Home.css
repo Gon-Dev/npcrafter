@@ -1,15 +1,10 @@
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
-  .home-wrapper {
+  .home-wrapper.rpgui-container {
     width: 100%;
     height: 100vh;
-    padding: 1rem 6rem;
+    padding: 0rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  .home-wrapper p,
-  .home-wrapper h1,
-  .home-wrapper h2 {
-    cursor: default;
   }
 }

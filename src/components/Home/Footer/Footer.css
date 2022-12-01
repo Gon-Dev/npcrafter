@@ -1,10 +1,8 @@
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
-  .footer-wrapper {
-    position: relative;
-  }
-  .footer-text {
-    font-size: 12px;
+
+  p.footer-text {
+    font-size: 8px;
     text-align: center;
     line-height: 1rem;
     z-index: 2;

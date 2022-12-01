@@ -1,37 +1,32 @@
 import "./Main.css";
-import star from "../../../assets/star-home.svg";
-import heroDescriptionShape from "../../../assets/hero-description-shape.svg";
-import heroQuestionsShape from "../../../assets/hero-questions-shape.svg";
 function Main() {
   return (
     <main className="main-wrapper">
       <div className="hero-wrapper">
-        <aside className="hero-title-wrapper">
-          <img className="hero-star" src={star} alt="magenta star" />
+        <aside className="hero-title-wrapper rpgui-container framed-golden">
           <h1 className="hero-title">Characters.</h1>
           <h1 className="hero-title">Done Right.</h1>
         </aside>
 
         <aside className="hero-description-wrapper">
-          <img className="hero-description-background" src={heroDescriptionShape} alt="" />
           <p className="hero-description-text">
             NpCrafter is a place to create and manage your npcs easily.
-            <br />
-            Bring them to life with Magic the Gathering illustrations!
           </p>
+          <button className="rpgui-button hero-description-button">Start crafting</button>
         </aside>
       </div>
 
       <aside className="hero-questions-wrapper">
-        <img className="hero-questions-background" src={heroQuestionsShape} alt="" />
-        <div className="question-wrapper question-wrapper-one">
-          <p className="question">Do you love tabletop roleplaying games?</p>
+        <div className="question-wrapper question-wrapper-one rpgui-container framed-golden-2">
+          <p className="question">Hey Dungeon Master! Are your <a target="_blank" href="https://letmegooglethat.com/?q=non+playable+character">npcs</a> souless and boring as hell?</p>
         </div>
-        <div className="question-wrapper question-wrapper-two">
-          <p className="question">Do you have cool illustrations for them?</p>
+        <div className="question-wrapper question-wrapper-two rpgui-container framed-golden-2">
+          <p className="question">Would you like to have cool images to illustrate them?</p>
         </div>
-        <div className="question-wrapper question-wrapper-three">
-          <p className="question">Are your NPCs ready to interact with your players?</p>
+        <div className="question-wrapper question-wrapper-three rpgui-container framed-golden-2">
+          <p className="question">
+            Stop improvising them on the fly, come and craft em' in a fun way!
+          </p>
         </div>
       </aside>
     </main>

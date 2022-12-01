@@ -5,7 +5,7 @@ import Footer from './Footer/Footer';
 
 function Home() {
   return(
-    <div className='home-wrapper'>
+    <div className='home-wrapper rpgui-container framed-grey'>
       <Header />
       <Main />
       <Footer />

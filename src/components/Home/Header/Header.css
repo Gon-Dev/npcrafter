@@ -4,8 +4,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 3rem;
 }
 .header-title {
   font-family: 'Krona One', sans-serif;
+  color: var(--white);
 }

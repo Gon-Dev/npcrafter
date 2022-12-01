@@ -1,0 +1,28 @@
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .footer-wrapper {
+    position: relative;
+  }
+  .footer-text {
+    font-size: 12px;
+    text-align: center;
+    line-height: 1rem;
+    z-index: 2;
+    color: var(--white);
+    letter-spacing: .02rem;
+  }
+  .footer-link {
+    color: var(--white);
+    transition: color ease-in-out .15s;
+  }
+  .footer-link:hover {
+    color: var(--flame);
+  }
+  .footer-background {
+    width: 100vw;
+    position: absolute;
+    bottom: -1rem;
+    left: -6rem;
+    z-index: -1;
+  }
+}
